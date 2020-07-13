@@ -214,8 +214,12 @@ install_yarn() {
 }
 
 install_and_cache_deps() {
+  info "Installing and caching node modules"
   cd $assets_dir
 
+  git config --global user.name "heroku-buildpack-phoenix-static"
+  git config --global user.email "heroku-buildpack-phoenix-static@example.com"
+  
   if [ -d $cache_dir/node_modules ]; then
     info "Loading node modules from cache"
     mkdir node_modules
@@ -226,7 +230,6 @@ install_and_cache_deps() {
     fi
   fi
 
-  info "Installing node modules"
   if [ -f "$assets_dir/yarn.lock" ]; then
     install_yarn_deps
   else

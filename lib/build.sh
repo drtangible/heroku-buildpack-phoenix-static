@@ -117,6 +117,10 @@ install_yarn() {
 install_and_cache_deps() {
   info "Installing and caching node modules"
   cd $assets_dir
+
+  git config --global user.name "heroku-buildpack-phoenix-static"
+  git config --global user.email "heroku-buildpack-phoenix-static@example.com"
+  
   if [ -d $cache_dir/node_modules ]; then
     mkdir -p node_modules
     cp -r $cache_dir/node_modules/* node_modules/

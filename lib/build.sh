@@ -214,7 +214,6 @@ install_yarn() {
 }
 
 install_and_cache_deps() {
-  info "Installing and caching node modules"
   cd $assets_dir
 
   git config --global user.name "heroku-buildpack-phoenix-static"
@@ -230,6 +229,7 @@ install_and_cache_deps() {
     fi
   fi
 
+  info "Installing node modules"
   if [ -f "$assets_dir/yarn.lock" ]; then
     install_yarn_deps
   else
@@ -254,7 +254,7 @@ install_npm_deps() {
 }
 
 install_yarn_deps() {
-  yarn install --production --no-default-rc --check-files --cache-folder $cache_dir/yarn-cache --pure-lockfile 2>&1
+  yarn install --no-default-rc --check-files --cache-folder $cache_dir/yarn-cache --pure-lockfile 2>&1
 }
 
 install_bower_deps() {
